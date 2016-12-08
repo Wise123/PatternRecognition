@@ -1,8 +1,8 @@
-C:\cat\1.jpg have face  have eyes  it is foto 
-C:\cat\2.jpg have face  have eyes  it is foto 
-C:\cat\3.jpg have face  have eyes  it is foto 
-C:\cat\4.jpg it is foto 
-C:\cat\5.jpg have face  have eyes  it is foto 
-C:\cat\6.jpg have eyes  it is foto 
-C:\cat\7.jpg have face  have eyes  it is foto 
-C:\cat\Tenders.docx it is text
+./pics/1.jpg have face  have eyes  it is foto
+./pics/2.jpg have face  have eyes  it is foto
+./pics/3.jpg have face  have eyes  it is foto
+./pics/4.jpg it is foto
+./pics/5.jpg have face  have eyes  it is foto
+./pics/6.jpg have eyes  it is foto
+./pics/7.jpg have face  have eyes  it is foto
+./pics/Tenders.docx it is text
