@@ -34,39 +34,26 @@ def detectEye(image):
     else:
         return False
 def detectFileType (image_path):
-    photo="photo"
-    text="text"
-    sr=""
-    res=image_path[7:]
-    st=res.find(".")
-    while st<len(res):
-        sr=sr+res[st]
-        st=st+1
-    if ((sr=='.jpg') or (sr=='.jpeg') or (sr=='.raw') or (sr=='.tiff') or (sr=='.png') or (sr=='.gif')):
-        return photo
-    if ((sr=='.txt') or (sr=='.docx') or (sr=='.xlsx') or (sr=='.pptx') or (sr=='.rtf') or (sr=='.odt') or (sr=='.pdf')):
-        return text
+    hsv = cv2.cvtColor(image_path, cv2.COLOR_BGR2HSV)
+    dist = cv2.calcHist([hsv],[0],None,[256],[0,256])
+    ras = cv.CalcEMD2(dist, CV_DIST_L1)
+    if (res>1):
+        return "schema"
 image_paths = [os.path.join('./pics', f) for f in os.listdir('./pics')]
 for image_path in image_paths:
     resstr=""
     resstr=resstr+image_path
     images.append(image_path)
-    if (detectFileType(image_path)=="text"):
-        resstr=resstr+' it is text '
-        text.append(resstr)
-        break
     gray = Image.open(image_path)
     image = np.array(gray, 'uint8')
     if (detectImage(image) == True):
         resstr=resstr+' have face '
     if (detectEye(image) == True):
         resstr=resstr+' have eyes '
-    if (detectFileType(image_path)=="photo"):
-        resstr=resstr+' it is foto '
+    if (detectFileType(image_path)=="schema"):
+        resstr=resstr+' it is schema '
     index.append(resstr)
     resstr=""
-for i in range(len(text)):
-    index.append(text[i])
 for i in range(len(index)):
     print(index[i])
 number = input("enter a number: ")
