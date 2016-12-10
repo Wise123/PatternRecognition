@@ -7,13 +7,9 @@ import subprocess
 index=[]
 images=[]
 
-#cascade=cv.Load(os.path.join(OpenCVRoot, "haarcascades", "haarcascade_frontalface_alt.xml"))
-cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
-cascad = cv2.CascadeClassifier('haarcascade_mcs_eyepair_big.xml')
+cascade = cv.Load(os.path.realpath('haarcascade_frontalface_alt.xml'))
+cascad = cv.Load(os.path.realpath('haarcascade_mcs_eyepair_big.xml'))
 
-#cascade = cv.Load('/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_alt.xml')
-#cascad = cv.Load('/usr/local/share/OpenCV/haarcascades/haarcascade_mcs_eyepair_big.xml')
-cv2.
 def detectImage(image):
     bitmap = cv.fromarray(image)
     faces = cv.HaarDetectObjects(bitmap, cascade, cv.CreateMemStorage(0))
