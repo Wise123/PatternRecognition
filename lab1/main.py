@@ -36,7 +36,8 @@ def detectFileType (image_path):
     ras = cv.CalcEMD2(dist, CV_DIST_L1)
     if (res>1):
         return "schema"
-image_paths = [os.path.join('./pics', f) for f in os.listdir('./pics')]
+put=os.getcwd()
+image_paths = [os.path.join(put, f) for f in os.listdir(put)]
 for image_path in image_paths:
     resstr=""
     resstr=resstr+image_path
