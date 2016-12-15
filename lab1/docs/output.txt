@@ -1,8 +1,0 @@
-./pics/1.jpg have face  have eyes  it is foto
-./pics/2.jpg have face  have eyes  it is foto
-./pics/3.jpg have face  have eyes  it is foto
-./pics/4.jpg it is foto
-./pics/5.jpg have face  have eyes  it is foto
-./pics/6.jpg have eyes  it is foto
-./pics/7.jpg have face  have eyes  it is foto
-./pics/Tenders.docx it is text

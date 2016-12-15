@@ -1,58 +1,65 @@
-import numpy as np
-import cv,cv2
-import os, shutil
-import sys
-from PIL import Image
-import subprocess
-index=[]
-images=[]
-
-cascade = cv.Load(os.path.realpath('haarcascade_frontalface_alt.xml'))
-cascad = cv.Load(os.path.realpath('haarcascade_mcs_eyepair_big.xml'))
+import cv2
+import os
+index = []
+images = []
+text = []
+face_cascade = cv2.CascadeClassifier('./cascades/haarcascade_frontalface_default.xml')
+eye_cascade = cv2.CascadeClassifier('./cascades/haarcascade_eye.xml')
 
 def detectImage(image):
-    bitmap = cv.fromarray(image)
-    faces = cv.HaarDetectObjects(bitmap, cascade, cv.CreateMemStorage(0))
-    if faces:
-        for (x,y,w,h),n in faces:
+    faces = face_cascade.detectMultiScale(image, 1.3, 5)
+    if type(faces).__name__ == 'ndarray':
+        for (x, y, w, h) in faces:
             pass
-            cv2.rectangle(image,(x,y),(x+w,y+h),(255,255,255),2)
+            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 255), 2)
             return True
     else:
         return False
+
+
 def detectEye(image):
-    bitmap = cv.fromarray(image)
-    faces = cv.HaarDetectObjects(bitmap, cascad, cv.CreateMemStorage(0))
-    if faces:
-        for (x,y,w,h),n in faces:
+    faces = eye_cascade.detectMultiScale(image, 1.3, 5)
+    if type(faces).__name__ == 'ndarray':
+        for (x, y, w, h) in faces:
             pass
-            cv2.rectangle(image,(x,y),(x+w,y+h),(255,255,255),2)
+            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 255), 2)
             return True
     else:
         return False
-def detectFileType (image_path):
-    hsv = cv2.cvtColor(image_path, cv2.COLOR_BGR2HSV)
-    dist = cv2.calcHist([hsv],[0],None,[256],[0,256])
-    ras = cv.CalcEMD2(dist, CV_DIST_L1)
-    if (res>1):
-        return "schema"
-put=os.getcwd()
-image_paths = [os.path.join(put, f) for f in os.listdir(put)]
+
+
+put = './pics'
+image_paths = [os.path.join(os.path.realpath(put), f) for f in os.listdir(put)]
+
 for image_path in image_paths:
-    resstr=""
-    resstr=resstr+image_path
+    resstr = ""
+    resstr += image_path
     images.append(image_path)
-    gray = Image.open(image_path)
-    image = np.array(gray, 'uint8')
-    if (detectImage(image) == True):
-        resstr=resstr+' have face '
-    if (detectEye(image) == True):
-        resstr=resstr+' have eyes '
-    if (detectFileType(image_path)=="schema"):
-        resstr=resstr+' it is schema '
+    img = cv2.imread(image_path)
+
+    try:
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    except cv2.error as e:
+        print(image_path + ' is not an image')
+        continue
+
+
+    if detectImage(gray):
+        resstr += ' has face'
+
+    if detectEye(gray):
+        resstr += ' has eyes'
+
     index.append(resstr)
-    resstr=""
+    resstr = ""
+
 for i in range(len(index)):
     print(index[i])
-number = input("enter a number: ")
-subprocess.call(images[number], shell=True)
+
+number = int(input("enter a number: "))
+print(images[number])
+
+im = cv2.imread(images[number])
+cv2.imshow('img',im)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
