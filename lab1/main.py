@@ -24,7 +24,6 @@ def detectImage(image):
     faces = face_cascade.detectMultiScale(image, 1.3, 5)
     if type(faces).__name__ == 'ndarray':
         for (x, y, w, h) in faces:
-            pass
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 255), 2)
             return True
     else:
@@ -35,7 +34,6 @@ def detectEye(image):
     faces = eye_cascade.detectMultiScale(image, 1.3, 5)
     if type(faces).__name__ == 'ndarray':
         for (x, y, w, h) in faces:
-            pass
             cv2.rectangle(image, (x, y), (x + w, y + h), (255, 255, 255), 2)
             return True
     else:
