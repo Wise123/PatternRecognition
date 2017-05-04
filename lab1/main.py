@@ -2,7 +2,7 @@ import cv2
 import os
 index = []
 images = []
-text = []
+text = []  
 face_cascade = cv2.CascadeClassifier('./cascades/haarcascade_frontalface_default.xml')
 eye_cascade = cv2.CascadeClassifier('./cascades/haarcascade_eye.xml')
 eye_glasses_cascade = cv2.CascadeClassifier('./cascades/haarcascade_mcs_upperbody.xml')
